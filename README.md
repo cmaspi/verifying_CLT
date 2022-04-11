@@ -1,8 +1,8 @@
 # Verifying CLT
 ### Authors
 [Chirag Mehta](https://github.com/cmaspi),
-[Dishank Jain](https://github.com/Dishank422)
-[Datta](https://github.com/SavaranaDatta)
+[Dishank Jain](https://github.com/Dishank422),
+[Datta](https://github.com/SavaranaDatta),
 [Vishwanath](https://github.com/vishwanath-123)
 ## Introduction
 We are testing whether CLT holds for various distribution or not. The distributions studied are listed as follows

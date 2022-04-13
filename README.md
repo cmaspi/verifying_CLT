@@ -12,7 +12,7 @@ We are testing whether CLT holds for various distribution or not. The distributi
 4. Cauchy distribution
 
 ## Method of Testing
-We are creating a sample of size 100 from each distribution. CLT says that $\bar{X}$ follows a normal distribution with mean $\mu$ and variance $\sigma/10$. We make 1000 samples, then visualise it using various techniques listed below
+We are creating a sample of size 100 from each distribution. CLT says that $\bar{X}$ follows a normal distribution with mean $\mu$ and variance $\sigma/10$. We make 5000 samples, then visualise it using various techniques listed below
 1. Q-Q plot
 2. histogram
 

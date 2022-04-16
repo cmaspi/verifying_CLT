@@ -4,6 +4,7 @@
 \usepackage{booktabs}
 \usepackage{amsmath, amsthm, amssymb, bm}
 \usepackage{tikz, pgfplots}
+\usepackage{float}
 
 \title{MA4240 Report}
 \author{Dishank, Chirag, Mulugu, Datta}
@@ -86,7 +87,7 @@ lorum ipsum dolor sit amet
     \item \textbf{Standard Normal}: The pdf of standard normal distribution is given by:
     $$f_X(x) = \dfrac{1}{\sqrt{(2\pi)}}exp(-\dfrac{x^2}{2})$$
     The mean is 0 and standard deviation is 1. Figure \ref{normal_pdf} shows the PDF of standard normal distribution.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{images/normal_01.png}
         \caption{PDF of standard normal distribution}
@@ -94,7 +95,7 @@ lorum ipsum dolor sit amet
     \end{figure}
     \item \textbf{Continuous uniform distribution}: Here, we have used U(0, 1). The PMF is given by $$f_X(x) = \begin{cases}1,\; 0 \le x \le 1 \\ 0,\; otherwise\end{cases}$$ 
     The mean is 0.5 and standard deviation is 0.289. Figure \ref{uni_pdf} shows the PDF of the uniform distribution.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{images/unif_graph}
         \caption{PDF of uniform distribution}
@@ -103,20 +104,21 @@ lorum ipsum dolor sit amet
     \item \textbf{Geometric Distribution}: Unlike the other distributions that we used, this distribution is for a discrete random variable. The PDF is given by
     $$f_X(k) = (1-p)^{k-1}p,\; k=1,2,3,...$$
     In our experiments, we arbitrarily chose to use $p=0.35$. The mean is $\dfrac{1}{p}$ and the standard deviation is $\dfrac{\sqrt{(1-p)}}{p}$. The PMF is given in figure \ref{geom_pmf}. 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{images/geom_pmf.png}
         \caption{PMF of geometric distribution}
         \label{geom_pmf}
     \end{figure}
     \item \textbf{Standard cauchy distribution}: The PDF is given by $$f_X(x) = \dfrac{1}{\pi (1+x^2)}$$ Neither the mean nor the standard deviation are finite. Thus CLT should not apply on this distribution. Figure \ref{cauchy_pdf} shows the PDF of standard cauchy distribution.
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.4]{images/cauchy-distribution.png}
         \caption{PDF of Cauchy Distribution}
         \label{cauchy_pdf}
     \end{figure}
 \end{enumerate}
+\section{Shapiro-Wilk Test}
 
 \section{Results}
 \section{Conclusion}

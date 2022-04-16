@@ -8,7 +8,7 @@
 We are testing whether CLT holds for various distribution or not. The distributions studied are listed as follows
 1. Gaussian distribution
 2. Uniform distribution
-3. $\chi^2$ distribution
+3. geometric distribution
 4. Cauchy distribution
 
 ## Method of Testing

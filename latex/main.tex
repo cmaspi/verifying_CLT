@@ -7,7 +7,7 @@
 \usepackage{float}
 
 \title{MA4240 Report}
-\author{Dishank, Chirag, Mulugu, Datta}
+\author{Dishank, Chirag, Vishwanath, Datta}
 \date{April 2022}
 
 % What to do
@@ -45,32 +45,106 @@
 \section{Introduction}
 Central Limit Theorem states that normalised sum of independent and identically distributed random variables tends towards a normal distribution, irrespective of the distribution of random variables.
 \begin{align}
-    Z = \lim_{n \to \infty} \left(\frac{\bar{X}_n-\mu}{\frac{\sigma}{n}}\right) \label{eq:CLT}
+    Z = \lim_{n \to \infty} \left(\frac{\bar{X}_n-\mu}{\frac{\sigma}{\sqrt{n}}}\right) \label{eq:CLT}
 \end{align}
 In this project, we propose to verify the correctness of Central Limit Theorem by running simulations beginning with a variety of distributions covered in the course.
 
-\section{Central Limit Theorem and imperial approximation}
+\section{Central Limit Theorem and empirical approximation}
 While equation \eqref{eq:CLT} suggests that $n$ should be a very large number. In practice, we tend to use the theorem for $n>30$. 
-\subsection{Proof of CLT}
-THE PROOF GOES HERE
+\subsection{Assumptions}
+\begin{itemize}
+\item  The samples drawn are independent.
+\item  The sample size is sufficiently large
+\item  The mean and variance of the sampling distribution are finite
+\end{itemize}
+\subsection{Proof}
+Let $X_1,X_2,\dots,X_n,\dots$ be i.i.d random variables with mean $\mu$ and variance $\sigma^2$.
+The sum $X_1+X_2+X_3+\dots+X_n,$ has mean = $n\mu$ and variance $n\sigma^2$.
+
+Now consider the random variable 
+\begin{equation}
+    Z_n = \frac{X_1+X_2+X_3+\dots+X_n - n\mu}{\sqrt{n\sigma^2}}
+\end{equation}
+which is equivalent to 
+\begin{equation}
+    Z_n = \sum_{i=1}^n \frac{Y_i}{\sqrt{n}}
+\end{equation}
+where,
+\begin{equation}
+    Y_i = \frac{X_i-\mu}{\sigma}\label{a}
+\end{equation}
+Each with mean = 0 and variance = 1.
+
+Since $Y_i$'s are all identically distributed the characteristic equation of $Z_n$ is given as.
+\begin{equation}
+    \phi_{Z_n}(t) =\displaystyle \prod_{i=1}^n\phi_{Y_n}\left(\frac{t}{\sqrt{n}}\right) = \left[\phi_{Y_1}\left(\frac{t}{\sqrt{n}}\right)\right]^n
+\end{equation}
+The characteristic equation of $Y_1$ is given
+\begin{equation}
+    \phi_{Y_1}\left(\frac{t}{\sqrt{n}}\right) = \left(1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right)\right), \;\; \left(\frac{t}{\sqrt{n}}\right)\to 0 \label{b}
+\end{equation}
+o is the little o notation.
+
+Now the Characteristic equation of $z_n$ in equation \eqref{a} is 
+\begin{equation}
+    \phi_{Z_n}(t) = \left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n
+\end{equation}
+We know that 
+$$\lim_{n\to\infty} \left(1+\frac{x}{n}\right)^n = e^x$$
+When we apply $\lim_{n\to\infty}$ the equation \eqref{b} will change into 
+\begin{equation}
+    \lim_{n\to\infty}\phi_{Z_n}(t) =\lim_{n\to\infty}\left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n =  e^{\frac{-1}{2}t^2}
+\end{equation}
+As all the higher terms will disappear as n goes to higher values.
+So, The R.H.S will be equal to Characteristic equation of $\mathcal{N}(0,1)$.
+Therefore as $n\to\infty$ the distribution $Z_n$ will approach $\mathcal{N}(0,1)$.
+i.e. $\frac{\sqrt{n}}{\sigma}(\Bar{X}_n - \mu) $ converges to the Normal distribution $\mathcal{N}(0,1)$.
+Hence proved.
+
+\section{Shapiro-Wilk Test}
+The Shapiro–Wilk test is used to determine whether a sample $x_{1},..., x_{n}$ was drawn from a normally distributed population.\\
+The test statistic(W):
+\begin{align*}
+    W=\frac{\left(\sum_{i=1}^{n}a_{i}x_{(i)}\right)^{2}}{\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}}
+\end{align*}
+where
+\begin{itemize}
+    \item $x_{(i)}$ is $i^{th}$ order statistic i.e, $i^{th}$ smallest element in the sample.
+    \item $\bar{x}$ is mean of the sample($x_{1},..,x_{n}$). 
+    \item $(a_{1},a_{2},..,a_{n})=\frac{m^{\top}V^{-1}}{C}$ where $C=||V^{-1}m||$.
+    \item Vector $m$ is composed of the expected values of the order statistics of independent and identically distributed random variables drawn from a typical normal distribution.
+    \item $V$ is the covariance matrix of those normal order statistics
+\end{itemize}
+\subsection{Interpretation}
+This test assumes that the population is regularly distributed. If the p value is smaller than the selected alpha level, the null hypothesis is rejected, and evidence that the data being tested are not normally distributed is found. The null hypothesis, on the other hand, cannot be rejected if the p value exceeds the set alpha threshold.
+\begin{itemize}
+    \item \textbf{If p $\leq$ 0.05}: then the null hypothesis can be rejected (i.e. the variable is NOT normally distributed).
+    \item \textbf{If p $>$ 0.05}: then the null hypothesis cannot be rejected (i.e. the variable \textbf{MAY BE} normally distributed).
+\end{itemize}
+
+\subsection{Why it works?}
+the Shapiro-Wilk is more powerful because it also takes into account the co variances between the order statistics, producing a best linear estimator of $\sigma$ from the Q-Q plot, which is then scaled by s. When the distribution is far from normal, the ratio isn't close to 1.
+
+
 
 \section{Hypothesis}
-We formulate our hypothesis in the following manner
+The hypothesis can be framed as follows
 \begin{align}
-    & H_A\text{ : CLT doesn't hold} \nonumber\\
-    & H_0\text{ : CLT holds}\nonumber
+    & H_A\text{ : The empirical approximation of the CLT does not hold} \nonumber\\
+    & H_0\text{ : The empirical approximation of the CLT holds}\nonumber
 \end{align}
-Here, type 2 error is when CLT is actually false but we fail to reject it. It is more dangerous because several models are built on the assumption that CLT is indeed correct.
+The significance level $\alpha$ is subject to the method of normality testing. For our case, the Shapiro-Wilk test suggests using a significance level of $0.05$. 
+% This means that if we obtain a p-value less than alpha, we reject the null hypothesis. Otherwise, we fail to reject the null hypothesis.
+
 \section{Procedure}
-We are generating a batch of $100$ samples from the distribution, we find the sample mean of this batch, call it $\bar{X}$. From Central Limit Theorem, we know
+We have chosen 4 sampling distributions. For each distribution, we generated 1000 batches of sizes 10, 30, 50 and 100 samples from the sampling distribution. We find the sample mean of each batch and call it $\bar{X}$. From Central Limit Theorem, we know
 \begin{align}
-    \bar{X} \sim \mathcal{N}(\mu, \frac{\sigma^2}{100})
+    \bar{X} \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)
 \end{align}
-To verify the claim, we repeat this experiment $5000$ times, then perform normality tests, which can be classified into two parts
+To verify the claim, we perform normality tests, which can be classified into two parts
 \begin{enumerate}
     \item Graphical Methods
     \begin{itemize}
-        \item Q-Q plot
         \item Histogram
     \end{itemize}
     \item{Frequentist tests}
@@ -79,13 +153,10 @@ To verify the claim, we repeat this experiment $5000$ times, then perform normal
     \end{itemize}
 \end{enumerate}
 
-\subsection{Shapiro-Wilk test}
-lorum ipsum dolor sit amet
-
 \subsection{Distributions used}
 \begin{enumerate}
     \item \textbf{Standard Normal}: The pdf of standard normal distribution is given by:
-    $$f_X(x) = \dfrac{1}{\sqrt{(2\pi)}}exp(-\dfrac{x^2}{2})$$
+    $$f_X(x) = \dfrac{1}{\sqrt{(2\pi)}}exp\left(-\dfrac{x^2}{2}\right)$$
     The mean is 0 and standard deviation is 1. Figure \ref{normal_pdf} shows the PDF of standard normal distribution.
     \begin{figure}[H]
         \centering
@@ -101,9 +172,9 @@ lorum ipsum dolor sit amet
         \caption{PDF of uniform distribution}
         \label{uni_pdf}
     \end{figure}
-    \item \textbf{Geometric Distribution}: Unlike the other distributions that we used, this distribution is for a discrete random variable. The PDF is given by
+    \item \textbf{Geometric Distribution}: Unlike the other distributions that we used, this distribution is for a discrete random variable. The PMF is given by
     $$f_X(k) = (1-p)^{k-1}p,\; k=1,2,3,...$$
-    In our experiments, we arbitrarily chose to use $p=0.35$. The mean is $\dfrac{1}{p}$ and the standard deviation is $\dfrac{\sqrt{(1-p)}}{p}$. The PMF is given in figure \ref{geom_pmf}. 
+    In our experiments, we arbitrarily chose to use $p=0.35$. The mean is $\dfrac{1}{p}$ and the standard deviation is $\dfrac{\sqrt{1-p}}{p}$. The PMF is given in figure \ref{geom_pmf}. 
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{images/geometric.png}
@@ -118,8 +189,18 @@ lorum ipsum dolor sit amet
         \label{cauchy_pdf}
     \end{figure}
 \end{enumerate}
-\section{Shapiro-Wilk Test}
 
 \section{Results}
+For Normal distribution and uniform distribution, we found that even for the smallest selected sample size of 10, the sample mean follows Normal distribution as per Shapiro-Wilk test. Thus CLT holds true for these for any sample size greater than or equal to 10. For Geometric distribution, we found that CLT did not hold for sample sizes 10 and 30 as per Shapiro-Wilk test. However, CLT held true for sample sizes 50 and 100. For Cauchy distribution, we found that CLT did not hold for any sample size. 
+
 \section{Conclusion}
+While using CLT, the empirical approximation is a good one but it may fail. To get better results, one may want to consider using a larger sample size of 50. Also, one may want to verify that the sampling distribution has finite mean and sample variance before applying CLT.
+
+\section{Contribution}
+\begin{itemize}
+    \item Chirag: Sections 1, 4, 5 and Code
+    \item Dishank: Sections 5, 6, 7 and Code
+    \item Savarana Datta: Section 3 and Slides
+    \item Vishwanath: Section 2 and Slides
+\end{itemize}
 \end{document}

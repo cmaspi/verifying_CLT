@@ -1,6 +1,6 @@
 \documentclass[10pt]{beamer}
 \usepackage[utf8]{inputenc}
-\usepackage{xeCJK}
+% \usepackage{xeCJK}
 \usepackage{graphicx}
 \usepackage {mathtools}
 \usepackage{utopia} %font utopia imported
@@ -35,7 +35,7 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 %------------------------------------------------------------
-\titlegraphic{\includegraphics[height=2.2cm]{images/9019.jpg}}
+\titlegraphic{\includegraphics[height=2.2cm]{9019.jpg}}
 
 \setbeamerfont{title}{size=\large}
 \setbeamerfont{subtitle}{size=\small}
@@ -44,7 +44,7 @@
 \setbeamerfont{institute}{size=\small}
 \title{Verification of CLT}
 \subtitle{MA4240}
-\author[]{ Savarana Datta Reddy(AI20BTECH11008)  \and Chirag Mehta(AI20BTECH11006)\\
+\author[]{ Savarana Datta Reddy(AI20BTECH11008)  \and Chirag Mehta(AI20BTECH11006)
 \and Dishank Jain(AI20BTECH11011) \and Vishwanath Sharma(MA20BTECH11010)}
 
 \institute{IIT Hyderabad}
@@ -179,16 +179,18 @@ where
     \item \textbf{If p $\leq$ 0.05}: then the null hypothesis can be rejected (i.e. the variable is NOT normally distributed).
     \item \textbf{If p $>$ 0.05}: then the null hypothesis cannot be rejected (i.e. the variable \color{red} \textbf{MAY BE} \color{black}normally distributed).
 \end{itemize}
+You can find the table for minimum W value required for particular  n and p values
+\href{https://github.com/cmaspi/verifying_CLT/tree/main/latex/report/images/p_value}{here}.
 \end{frame}
 \begin{frame}{}
- In this test, the steps are as follows:
+ The Shapiro-Wilk statistic can be calculated using following steps:
        \begin{itemize}
            \item Order the data from the least to greatest. $x_{j}$ denotes the ($j^{th}$) order statistic i.e, $j^{th}$ smallest element in the set.
-           \item We calculate value $X_{(n-i+1)}-X_{i}$ for i in range [0,$\lceil{n/2}\rceil$]
-           \item Get the Shapiro Wilk coefficients($a_{in}$) from the table and calculate the value of b.
+           \item We calculate value $X_{(n-i+1)}-X_{(i)}$ for i in range [0,$\lceil{n/2}\rceil$]
+           \item Get the Shapiro Wilk coefficients($a_{in}$) from the \href{https://github.com/cmaspi/verifying_CLT/tree/main/latex/report/images/coefficients}{table} and calculate the value of b.
             \begin{block}{}
             \begin{align}
-              b=\sum_{i} b_{i} = \sum_{i=1}^{\lceil{n/2}\rceil} (X_{n-i+1}-X_{i}) a_{in} 
+              b=\sum_{i} b_{i} = \sum_{i=1}^{\lceil{n/2}\rceil} (X_{(n-i+1)}-X_{(i)}) a_{in} 
             \end{align}
             \end{block}
             \item Calculate standard deviation($s$) of the data set to estimate the Shapiro Wilk statistic ($W$)
@@ -198,6 +200,7 @@ where
             \end{align}
             \end{block}
        \end{itemize}
+       This estimate of W is close enough to the original one for $n\leq50$.
 \end{frame}
 
 
@@ -223,6 +226,8 @@ $$20,38,40,45,50,63,70,75,79,86$$
     \item The value of b = 62.095
     \item The value of $W=0.959$. The minimum value of w needed to have p-value of atleast 0.05 is 0.869 (for n=10). As the observed $W>0.869$ we can say that the data set behaves like a normal distribution. 
 \end{itemize}
+You can find the python code for implementation
+\href{https://github.com/cmaspi/verifying_CLT/blob/main/codes/examples.ipynb}{here}.
 \end{frame}
 \section{Hypothesis}
 \begin{frame}{Hypothesis}
@@ -322,16 +327,28 @@ $$f_X(x) = \dfrac{1}{\pi (1+x^2)}$$
 \end{frame}
 \section{Results}
 \begin{frame}{Results}
-    For Normal distribution and uniform distribution, we found that even for the smallest selected sample size of 10, the sample mean follows Normal distribution as per Shapiro-Wilk test. Thus CLT holds true for these for any sample size greater than or equal to 10. For Geometric distribution, we found that CLT did not hold for sample sizes 10 and 30 as per Shapiro-Wilk test. However, CLT held true for sample sizes 50 and 100. For Cauchy distribution, we found that CLT did not hold for any sample size. 
+    For Normal distribution and uniform distribution, we found that even for the smallest selected sample size of 10, the sample mean follows Normal distribution as per Shapiro-Wilk test. Thus CLT holds true for these for any sample size greater than or equal to 10. For Geometric distribution, we found that CLT did not hold for sample sizes 10 and 30 as per Shapiro-Wilk test. However, CLT held true for sample sizes 50 and 100. For Cauchy distribution, we found that CLT did not hold for any sample size. \\
+    \href{https://github.com/cmaspi/verifying_CLT/blob/main/codes/visualise_hist.ipynb}{here}
 \end{frame}
 \section{Conclusion}
 \begin{frame}{Conclusion}
     While using CLT, the empirical approximation is a good one but it may fail. To get better results, one may want to consider using a larger sample size of 50. Also, one may want to verify that the sampling distribution has finite mean and sample variance before applying CLT.
 \end{frame}
+
+\section{References}
+\begin{frame}{References}
+\begin{enumerate}
+    \item Wikipedia contributors. \href{https://en.wikipedia.org/wiki/Central_limit_theorem}{Central Limit Theorem}
+    \item Wikipedia contributors. \href{https://en.wikipedia.org/wiki/Shapiro\%E2\%80\%93Wilk_test}{Shapiro-Wilk test}
+    \item Wikipedia contributors \href{https://en.wikipedia.org/wiki/Cauchy_distribution}{Cauchy Distribution}
+    \item link-springer. \href{https://link.springer.com/content/pdf/bbm\%3A978-1-4684-0167-7\%2F1.pdf}{Shapiro-Wilk test (pdf)}
+    \item \href{https://math.mit.edu/~rmd/465/shapiro.pdf}{Shapiro-Wilk test and related tests for normality (pdf)}
+\end{enumerate}
+\end{frame}
+
 \begin{frame}
 \textcolor{myNewColorA}{\Huge{\centerline{Thank you!}}}
 \end{frame}
-
 \end{document}
 
 

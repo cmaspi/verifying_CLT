@@ -1,45 +1,91 @@
-\documentclass{beamer}
-
-
-\usepackage{amsmath, amsthm, amssymb, bm}
-\usepackage{tikz, pgfplots}
-\usetikzlibrary{shapes, arrows, positioning, fit, calc}
-\pgfplotsset{compat = 1.18}
-\usepackage[arrowdel]{physics}
-
+\documentclass[10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\usepackage {mathtools}
+\usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usepackage{xcolor}%[dvipsnames]
+%\usepackage[hidelinks]{hyperref}
+%\usetheme{Copenhagen}
+%\newenvironment{vblock}[3]{%
+%\setbeamercolor{block body}{#2}
+%\setbeamercolor{body title}{#3}
+%\begin{block}{#1}}{\end{block}}
 
-\usetheme{PaloAlto}
-\definecolor{firebrick}{rgb}{0.13, 0.13, 0.7}
-\usecolortheme[named = firebrick]{structure}
 
+% set colors
+%\definecolor{myNewColorA}{RGB}{126,12,110}
+%\definecolor{myNewColorB}{RGB}{165,85,154}
+%\definecolor{myNewColorC}{RGB}{203,158,197}
+\definecolor{myNewColorA}{RGB}{242,85,37}
+\definecolor{myNewColorB}{RGB}{247,124,40}
+\definecolor{myNewColorC}{RGB}{255,209,84}
+\setbeamercolor*{palette primary}{bg=myNewColorC}
+\setbeamercolor*{palette secondary}{bg=myNewColorB, fg = white}
+\setbeamercolor*{palette tertiary}{bg=myNewColorA, fg = white}
+\setbeamercolor*{titlelike}{fg=myNewColorA}
+\setbeamercolor*{title}{bg=myNewColorA, fg = white}
+\setbeamercolor*{item}{fg=myNewColorA}
+\setbeamercolor*{caption name}{fg=myNewColorA}
+\setbeamercolor*{block title}{use=structure,fg=white,bg=myNewColorB}
+\setbeamercolor*{block body}{use=structure,fg=black,bg=myNewColorC}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+%------------------------------------------------------------
+\titlegraphic{\includegraphics[height=2.2cm]{images/9019.jpg}}
 
-\setbeamersize{sidebar width left=0cm}
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+\title{Verification of CLT}
+\subtitle{MA4240}
+\author[]{ Savarana Datta Reddy(AI20BTECH11008)  \and Chirag Mehta(AI20BTECH11006)\\
+\and Dishank Jain(AI20BTECH11011) \and Vishwanath Sharma(MA20BTECH11010)}
 
-\title{Verifiation of Central Limit Theorem}
-\author[]{Chirag Mehta, G.Savarana Datta Reddy, Dishank Jain, Vishwanath Sharma}
-\institute{Indian Institute Of Technology, Hyderabad}
-\date{}
+\institute{IIT Hyderabad}
+\date{April 25 2022}
 
-% 1st slide
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+%------------------------------------------------------------
+
 \begin{document}
-\begin{frame}{MA4240 - Applied Statistics}
-\titlepage
-\end{frame}
 
-% 2nd slide
+%The next statement creates the title page.
+\frame{\titlepage}
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+%------------------------------------------------------------
+\section{Introduction}
 \begin{frame}{Introduction}
 Central Limit Theorem states that normalised sum of independent and identically distributed random variables tends towards a normal distribution, irrespective of the distribution of random variables.
+\begin{block}
+
 \begin{align}
     Z = \lim_{n \to \infty} \left(\frac{\bar{X}_n-\mu}{\frac{\sigma}{\sqrt{n}}}\right) \label{eq:CLT}
 \end{align}
+\end{block}
+
 In this project, we propose to verify the correctness of Central Limit Theorem by running simulations beginning with a variety of distributions covered in the course.
 \end{frame}
 
 
-
-% 3rd slide
+\section{CLT and empirical approximations}
 \begin{frame}{CLT and empirical approximation}
     While equation \eqref{eq:CLT} suggests that $n$ should be a very large number. In practice, we tend to use the theorem for $n>30$.\\
 These are some of the assumptions for the distribution:
@@ -49,9 +95,6 @@ These are some of the assumptions for the distribution:
 \item  The mean and variance of the sampling distribution are finite
 \end{itemize}
 \end{frame}
-
-
-
 \begin{frame}{}
 Proof:\\
 Let $X_1,X_2,\dots,X_n,\dots$ be i.i.d random variables with mean $\mu$ and variance $\sigma^2$.
@@ -75,13 +118,17 @@ where,
     Each with mean = 0 and variance = 1.
 
 Since $Y_i$'s are all identically distributed the characteristic equation of $Z_n$ is given as.
+\begin{block}{}
 \begin{equation}
     \phi_{Z_n}(t) =\displaystyle \prod_{i=1}^n\phi_{Y_n}\left(\frac{t}{\sqrt{n}}\right) = \left[\phi_{Y_1}\left(\frac{t}{\sqrt{n}}\right)\right]^n
 \end{equation}
+\end{block}
 The characteristic equation of $Y_1$ is given
+\begin{block}{}
 \begin{equation}
     \phi_{Y_1}\left(\frac{t}{\sqrt{n}}\right) = \left(1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right)\right), \;\; \left(\frac{t}{\sqrt{n}}\right)\to 0 \label{b}
 \end{equation}
+\end{block}
 o is the little o notation.
 
 Now the Characteristic equation of $z_n$ in equation \eqref{a} is 
@@ -94,9 +141,11 @@ Now the Characteristic equation of $z_n$ in equation \eqref{a} is
 We know that 
 $$\lim_{n\to\infty} \left(1+\frac{x}{n}\right)^n = e^x$$
 When we apply $\lim_{n\to\infty}$ the equation \eqref{b} will change into 
+\begin{block}{}
 \begin{equation}
     \lim_{n\to\infty}\phi_{Z_n}(t) =\lim_{n\to\infty}\left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n =  e^{\frac{-1}{2}t^2}
 \end{equation}
+\end{block}
 As all the higher terms will disappear as n goes to higher values.
 So, The R.H.S will be equal to Characteristic equation of $\mathcal{N}(0,1)$.
 Therefore as $n\to\infty$ the distribution $Z_n$ will approach $\mathcal{N}(0,1)$.
@@ -104,12 +153,78 @@ i.e. $\frac{\sqrt{n}}{\sigma}(\Bar{X}_n - \mu) $ converges to the Normal distrib
 Hence proved.
 \end{frame}
 
-% 4th slide
+\section{Shapiro-Wilk Test}
 \begin{frame}{Shapiro-wilk test}
-    
+   \begin{itemize}
+       \item The \textbf{Shapiro-Wilk Test } is a test of normality in frequentist statistics. It was published in 1965 by Sameul Sanford Shapiro and Martin Wilk.
+       \item The test statistic(W):
+       \begin{block}{}
+\begin{align}
+    W=\frac{\left(\sum_{i=1}^{n}a_{i}x_{(i)}\right)^{2}}{\sum_{i=1}^{n}(x_{i}-\bar{x})^{2}}
+\end{align}
+\end{block}
+where
+\begin{itemize}
+    \item $x_{(i)}$ is $i^{th}$ order statistic i.e, $i^{th}$ smallest element in the sample.
+    \item $\bar{x}$ is mean of the sample($x_{1},..,x_{n}$). 
+    \item $(a_{1},a_{2},..,a_{n})=\frac{m^{\top}V^{-1}}{C}$ where $C=||V^{-1}m||$.
+    \item Vector $m$ is composed of the expected values of the order statistics of independent and identically distributed random variables drawn from a typical normal distribution.
+    \item $V$ is the covariance matrix of those normal order statistics
+\end{itemize}
+   \end{itemize} 
+\end{frame}
+\begin{frame}{P-Value}
+    This test assumes that the population is regularly distributed. If the p value is smaller than the selected alpha level, the null hypothesis is rejected, and evidence that the data being tested are not normally distributed is found. The null hypothesis, on the other hand, cannot be rejected if the p value exceeds the set alpha threshold. Generally we consider alpha threshold as 0.05.
+\begin{itemize}
+    \item \textbf{If p $\leq$ 0.05}: then the null hypothesis can be rejected (i.e. the variable is NOT normally distributed).
+    \item \textbf{If p $>$ 0.05}: then the null hypothesis cannot be rejected (i.e. the variable \color{red} \textbf{MAY BE} \color{black}normally distributed).
+\end{itemize}
+\end{frame}
+\begin{frame}{}
+ In this test, the steps are as follows:
+       \begin{itemize}
+           \item Order the data from the least to greatest. $x_{j}$ denotes the ($j^{th}$) order statistic i.e, $j^{th}$ smallest element in the set.
+           \item We calculate value $X_{(n-i+1)}-X_{i}$ for i in range [0,$\lceil{n/2}\rceil$]
+           \item Get the Shapiro Wilk coefficients($a_{in}$) from the table and calculate the value of b.
+            \begin{block}{}
+            \begin{align}
+              b=\sum_{i} b_{i} = \sum_{i=1}^{\lceil{n/2}\rceil} (X_{n-i+1}-X_{i}) a_{in} 
+            \end{align}
+            \end{block}
+            \item Calculate standard deviation($s$) of the data set to estimate the Shapiro Wilk statistic ($W$)
+            \begin{block}{}
+            \begin{align}
+                W = \frac{b^{2}}{s^{2}(n-1)}
+            \end{align}
+            \end{block}
+       \end{itemize}
 \end{frame}
 
-% 5th slide
+
+\begin{frame}{Example-1}
+ The following data represents the concentration of nickle in solid waste,\begin{align*} 58.8,19,39,3.1,1,81.5,151,942,262,
+    331,\\27,85.6,56,14,21.4,10,8.7,64.4,578,637 \end{align*}
+    \begin{itemize}
+        \item Arrange in ascending order X=[1, 3.1, 8.7, 10, 14, 19, 21.4, 27, 39, 56, 58.8, 64.4, 81.5, 85.6, 151, 262, 331, 578, 637, 942]
+        \item Difference Matrix = $[ 941,633.9,569.3,321,248,132,64.2,54.5,25.4,2.8]$
+        \item Shapiro Wilk coefficients for $n=20$ is [0.4734,0.3211,0.2565,0.2085,0.1686,0.1334,0.1013,0.0711,0.0422,0.0140]
+        \item b value is $=(941)(0.4734)+(633)(0.3211)+.. = 932.8$
+        \item Standard Deviation of the data set $s=259.72$
+        \item The value of $W=\frac{b^{2}}{s^{2}(n-1)}=0.679$. The minimum value of w needed to have p-value of atleast 0.05 is 0.905 (for n=20). As the observed $W<0.905$ we can conclude that the given data set is not normally distributed.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Example-2}
+Consider the following data
+$$20,38,40,45,50,63,70,75,79,86$$
+\begin{itemize}
+    \item Ascending order = $20,38,40,45,50,63,70,75,79,86$
+    \item Difference Vector = $66,41,35,25,13$
+    \item Shapiro Wilk coefficients for n=10 are $0.5739,0.3219,0.2141,0.1224,0.0339$
+    \item The value of b = 62.095
+    \item The value of $W=0.959$. The minimum value of w needed to have p-value of atleast 0.05 is 0.869 (for n=10). As the observed $W>0.869$ we can say that the data set behaves like a normal distribution. 
+\end{itemize}
+\end{frame}
+\section{Hypothesis}
 \begin{frame}{Hypothesis}
     The hypothesis can be framed as follows
 \begin{align}
@@ -119,7 +234,7 @@ Hence proved.
 The significance level $\alpha$ is subject to the method of normality testing. For our case, the Shapiro-Wilk test suggests using a significance level of $0.05$. 
 \end{frame}
 
-
+\section{Procedure}
 \begin{frame}{Procedure}
 We have chosen 4 sampling distributions. For each distribution, we generated 1000 batches of sizes 10, 30, 50 and 100 samples from the sampling distribution. We find the sample mean of each batch and call it $\bar{X}$. From Central Limit Theorem, we know
 \begin{align}
@@ -137,12 +252,14 @@ To verify the claim, we perform normality tests, which can be classified into tw
     \end{itemize}
 \end{enumerate}
 \end{frame}
-
+\subsection{Standard Normal}
 \begin{frame}{}
 Distributions used:
 
     \textbf{Standard Normal}: The pdf of standard normal distribution is given by:
+    \begin{block}{}
     $$f_X(x) = \dfrac{1}{\sqrt{(2\pi)}}exp\left(-\dfrac{x^2}{2}\right)$$
+    \end{block}
     The mean is 0 and standard deviation is 1. Figure \ref{normal_pdf} shows the PDF of standard normal distribution.
 \end{frame}
 \begin{frame}{}
@@ -155,7 +272,11 @@ Distributions used:
 \end{frame}
 
 \begin{frame}{}
- \textbf{Continuous uniform distribution}: Here, we have used U(0, 1). The PMF is given by $$f_X(x) = \begin{cases}1,\; 0 \le x \le 1 \\ 0,\; otherwise\end{cases}$$ 
+\subsection{Continuous Uniform Distribution}
+ \textbf{Continuous uniform distribution}: Here, we have used U(0, 1). The PMF is given by 
+ \begin{block}{}
+ $$f_X(x) = \begin{cases}1,\; 0 \le x \le 1 \\ 0,\; otherwise\end{cases}$$ 
+ \end{block}
     The mean is 0.5 and standard deviation is 0.289. Figure \ref{uni_pdf} shows the PDF of the uniform distribution.
 \end{frame}
 \begin{frame}{}
@@ -168,8 +289,11 @@ Distributions used:
 \end{frame}
 
 \begin{frame}{}
+\subsection{Geometric Distribution}
  \textbf{Geometric Distribution}: Unlike the other distributions that we used, this distribution is for a discrete random variable. The PMF is given by
+ \begin{block}{}
     $$f_X(k) = (1-p)^{k-1}p,\; k=1,2,3,...$$
+    \end{block}
     In our experiments, we arbitrarily chose to use $p=0.35$. The mean is $\dfrac{1}{p}$ and the standard deviation is $\dfrac{\sqrt{1-p}}{p}$. The PMF is given in figure \ref{geom_pmf}. 
 \end{frame}
 \begin{frame}{}
@@ -182,7 +306,11 @@ Distributions used:
 \end{frame}
 
 \begin{frame}{}
-\textbf{Standard cauchy distribution}: The PDF is given by $$f_X(x) = \dfrac{1}{\pi (1+x^2)}$$ Neither the mean nor the standard deviation are finite. Thus CLT should not apply on this distribution. Figure \ref{cauchy_pdf} shows the PDF of standard cauchy distribution.
+\subsection{Standard Cauchy Distribution}
+\textbf{Standard cauchy distribution}: The PDF is given by
+\begin{block}{}
+$$f_X(x) = \dfrac{1}{\pi (1+x^2)}$$
+\end{block}Neither the mean nor the standard deviation are finite. Thus CLT should not apply on this distribution. Figure \ref{cauchy_pdf} shows the PDF of standard cauchy distribution.
 \end{frame}
 \begin{frame}{}
     \begin{figure}[H]
@@ -192,21 +320,19 @@ Distributions used:
         \label{cauchy_pdf}
     \end{figure}
 \end{frame}
-
-% 7th slide
+\section{Results}
 \begin{frame}{Results}
     For Normal distribution and uniform distribution, we found that even for the smallest selected sample size of 10, the sample mean follows Normal distribution as per Shapiro-Wilk test. Thus CLT holds true for these for any sample size greater than or equal to 10. For Geometric distribution, we found that CLT did not hold for sample sizes 10 and 30 as per Shapiro-Wilk test. However, CLT held true for sample sizes 50 and 100. For Cauchy distribution, we found that CLT did not hold for any sample size. 
 \end{frame}
-
-
-% 8th slide
+\section{Conclusion}
 \begin{frame}{Conclusion}
     While using CLT, the empirical approximation is a good one but it may fail. To get better results, one may want to consider using a larger sample size of 50. Also, one may want to verify that the sampling distribution has finite mean and sample variance before applying CLT.
 \end{frame}
-
-\begin{frame}{}
-\begin{center}
-        \Huge{Thank You}
-\end{center}
+\begin{frame}
+\textcolor{myNewColorA}{\Huge{\centerline{Thank you!}}}
 \end{frame}
+
 \end{document}
+
+
+

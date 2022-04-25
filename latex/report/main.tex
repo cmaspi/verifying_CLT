@@ -32,7 +32,7 @@ While equation \eqref{eq:CLT} suggests that $n$ should be a very large number. I
 \item  The mean and variance of the sampling distribution are finite
 \end{itemize}
 \subsection{Proof}
-Let $X_1,X_2,\dots,X_n,\dots$ be i.i.d random variables with mean $\mu$ and variance $\sigma^2$.
+Let $X_1,X_2,\dots,X_n$ be i.i.d random variables with mean $\mu$ and variance $\sigma^2$.
 The sum $X_1+X_2+X_3+\dots+X_n,$ has mean = $n\mu$ and variance $n\sigma^2$.
 
 Now consider the random variable 
@@ -143,10 +143,6 @@ $$20,38,40,45,50,63,70,75,79,86$$
 
 \noindent You can find the python codes implementing the above examples 
 \href{https://github.com/cmaspi/verifying_CLT/blob/main/codes/examples.ipynb}{here}.
-
-\subsection{Why it works?}
-The Shapiro-Wilk is more powerful because it also takes into account the co variances between the order statistics, producing a best linear estimator of $\sigma$ from the Q-Q plot, which is then scaled by s. When the distribution is far from normal, the ratio isn't close to 1.
-
 
 
 \section{Hypothesis}

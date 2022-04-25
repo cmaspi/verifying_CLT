@@ -12,19 +12,18 @@ We are testing whether CLT holds for various distribution or not. The distributi
 4. Cauchy distribution
 
 ## Method of Testing
-We are creating a sample of size 100 from each distribution. CLT says that $\bar{X}$ follows a normal distribution with mean $\mu$ and variance $\sigma/10$. We make 5000 samples, then visualise it using various techniques listed below
-1. Q-Q plot
-2. histogram
+We are generating 1000 bacthes of size 10, 30, 50, 100 from each distribution. CLT says that $\bar{X}$ follows a normal distribution with mean $\mu$ and variance $\sigma/10$. We are visualising it using various techniques listed below
+1. histogram
 
-We use other hypothesis testing techniques to verify that the distribution is indeed normal. We formulate our problem in the following way
-- Alternate hypothesis: CLT doesn't hold
-- Null hypothesis: CLT holds true
+We use other hypothesis testing techniques (frequentist tests) to verify that the distribution is indeed normal. We formulate our problem in the following way
+- Alternate hypothesis: empirical approximation of the CLT doesn't hold
+- Null hypothesis: empirical approximation of the CLT holds
 
-Here, type 2 error is when CLT is actually false but we fail to reject it. It is more dangerous because several models are built on the assumption that CLT is indeed correct. We will be using one or more of the following techniques
-1. D'Agostino Pearson omnibus
-2. Shapiro-wilk
-3. Kolmogorov-Smimov
+We will be using the following technique
+1. Shapiro-wilk
+
+Note there are several other frequentist tests such as D'Agostino Pearson omnibus or Kolmogorov-Smimov, but shapiro wilk is the most popular one, and it gives more accurate results.
 
 -------------------
 
-If CLT is correct then $\bar{X}$ should follow normal distribution and it should have mean $\mu$ which is the sample as the original distribution we sampled it from. While, for the variance, we expect the variance to be $\sigma/10$. We will take only a large risk, perhaps like 0.95
+If CLT is correct then $\bar{X}$ should follow normal distribution and it should have mean $\mu$ which is the sample as the original distribution we sampled it from. While, for the variance, we expect the variance to be $\sigma/\sqrt{n}$.

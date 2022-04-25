@@ -1,0 +1,12 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{CLT and empirical approximations}{5}{0}{2}
+\beamer@sectionintoc {3}{Shapiro-Wilk Test}{10}{0}{3}
+\beamer@sectionintoc {4}{Hypothesis}{16}{0}{4}
+\beamer@sectionintoc {5}{Procedure}{18}{0}{5}
+\beamer@subsectionintoc {5}{1}{Standard Normal}{20}{0}{5}
+\beamer@subsectionintoc {5}{2}{Continuous Uniform Distribution}{22}{0}{5}
+\beamer@subsectionintoc {5}{3}{Geometric Distribution}{24}{0}{5}
+\beamer@subsectionintoc {5}{4}{Standard Cauchy Distribution}{26}{0}{5}
+\beamer@sectionintoc {6}{Results}{28}{0}{6}
+\beamer@sectionintoc {7}{Conclusion}{30}{0}{7}
+\beamer@sectionintoc {8}{References}{32}{0}{8}

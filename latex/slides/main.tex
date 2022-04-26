@@ -77,7 +77,7 @@ Central Limit Theorem states that normalised sum of independent and identically 
 \begin{block}
 
 \begin{align}
-    Z = \lim_{n \to \infty} \left(\frac{\bar{X}_n-\mu}{\frac{\sigma}{\sqrt{n}}}\right) \label{eq:CLT}
+    Z = \lim_{n \to \infty} \left(\frac{\bar{X}_n-\mu}{\frac{\sigma}{\sqrt{n}}}\right) \sim \mathcal{N}\left(0,1\right) \label{eq:CLT}
 \end{align}
 \end{block}
 
@@ -102,11 +102,11 @@ The sum $X_1+X_2+X_3+\dots+X_n,$ has mean = $n\mu$ and variance $n\sigma^2$.
 
 Now consider the random variable 
 \begin{equation}
-    Z_n = \frac{X_1+X_2+X_3+\dots+X_n - n\mu}{\sqrt{n\sigma^2}}
+    Z = \frac{X_1+X_2+X_3+\dots+X_n - n\mu}{\sqrt{n\sigma^2}}
 \end{equation}
 which is equivalent to 
 \begin{equation}
-    Z_n = \sum_{i=1}^n \frac{Y_i}{\sqrt{n}}
+    Z = \sum_{i=1}^n \frac{Y_i}{\sqrt{n}}
 \end{equation}
 where,
 \begin{equation}
@@ -117,10 +117,10 @@ where,
 \begin{frame}{}
     Each with mean = 0 and variance = 1.
 
-Since $Y_i$'s are all identically distributed the characteristic equation of $Z_n$ is given as.
+Since $Y_i$'s are all identically distributed the characteristic equation of $Z$ is given as.
 \begin{block}{}
 \begin{equation}
-    \phi_{Z_n}(t) =\displaystyle \prod_{i=1}^n\phi_{Y_n}\left(\frac{t}{\sqrt{n}}\right) = \left[\phi_{Y_1}\left(\frac{t}{\sqrt{n}}\right)\right]^n
+    \phi_{Z}(t) =\displaystyle \prod_{i=1}^n\phi_{Y_i}\left(\frac{t}{\sqrt{n}}\right) = \left[\phi_{Y_1}\left(\frac{t}{\sqrt{n}}\right)\right]^n
 \end{equation}
 \end{block}
 The characteristic equation of $Y_1$ is given
@@ -131,24 +131,24 @@ The characteristic equation of $Y_1$ is given
 \end{block}
 o is the little o notation.
 
-Now the Characteristic equation of $z_n$ in equation \eqref{a} is 
+Now the Characteristic equation of $Z$ in equation \eqref{a} is 
 \end{frame}
 
 \begin{frame}{}
     \begin{equation}
-    \phi_{Z_n}(t) = \left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n
+    \phi_{Z}(t) = \left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n
 \end{equation}
 We know that 
 $$\lim_{n\to\infty} \left(1+\frac{x}{n}\right)^n = e^x$$
 When we apply $\lim_{n\to\infty}$ the equation \eqref{b} will change into 
 \begin{block}{}
 \begin{equation}
-    \lim_{n\to\infty}\phi_{Z_n}(t) =\lim_{n\to\infty}\left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n =  e^{\frac{-1}{2}t^2}
+    \lim_{n\to\infty}\phi_{Z}(t) =\lim_{n\to\infty}\left( 1-\frac{t^2}{2n} + o\left(\frac{t^2}{n}\right) \right)^n =  e^{\frac{-1}{2}t^2}
 \end{equation}
 \end{block}
 As all the higher terms will disappear as n goes to higher values.
 So, The R.H.S will be equal to Characteristic equation of $\mathcal{N}(0,1)$.
-Therefore as $n\to\infty$ the distribution $Z_n$ will approach $\mathcal{N}(0,1)$.
+Therefore as $n\to\infty$ the distribution $Z$ will approach $\mathcal{N}(0,1)$.
 i.e. $\frac{\sqrt{n}}{\sigma}(\Bar{X}_n - \mu) $ converges to the Normal distribution $\mathcal{N}(0,1)$.
 Hence proved.
 \end{frame}
@@ -200,7 +200,6 @@ You can find the table for minimum W value required for particular  n and p valu
             \end{align}
             \end{block}
        \end{itemize}
-       This estimate of W is close enough to the original one for $n\leq50$.
 \end{frame}
 
 
